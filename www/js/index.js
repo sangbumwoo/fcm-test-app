@@ -27,6 +27,14 @@ function onDeviceReady() {
   console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
   document.getElementById('deviceready').classList.add('ready');
 
+  cordova.plugins.firebase.messaging
+    .requestPermission({ forceShow: true })
+    .then(function () {
+      console.log(
+        "You'll get foreground notifications when a push message arrives"
+      );
+    });
+
   cordova.plugins.firebase.messaging.getToken().then(function (token) {
     console.log('Got device token: ', token);
   });
